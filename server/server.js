@@ -2,7 +2,7 @@ const http = require('http')
 
 
 const server = http.createServer((req, res) => {
-    res.end('15:42')
+    res.end('15:44')
 })
 
 const PORT = 80
