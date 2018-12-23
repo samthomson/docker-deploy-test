@@ -15,15 +15,27 @@ I'd expected to create a remote machine with `docker-machine` on DO or similar. 
     - `docker build -t test-app .`
     - `docker run -d -p 3004:80 test-app`
 
+## initial deploy
+- get a digital ocean API key, set it as an env locally with `export DO_TOKEN="INSERT_TOKEN_HERE"`
+- run this command to create a remote VPS (replace 'test-app' with your app name: `docker-machine create --driver=digitalocean --digitalocean-access-token=$DO_TOKEN --digitalocean-size=1gb test-app`
+- `docker-machine ssh test-app`
+- `git clone [repo] test-app`
+- [follow update workflow]
+
+
+## update workflow
+
+- `docker-machine ssh test-app`
+- `cd test-app`
+- `bash update-app.sh`
+
 ### to do
 
-- create script that automates some of this
 - multi container deploy
-- build and run in one command
 - use docker-compose file
 
 
-## how to run (doesn't work - see above)
+## The below didn't work:
 
 - get a digital ocean API key, set it as an env locally with `export DO_TOKEN="INSERT_TOKEN_HERE"`
 - run this command to create a remote VPS (replace 'test-app' with your app name: `docker-machine create --driver=digitalocean --digitalocean-access-token=$DO_TOKEN --digitalocean-size=1gb test-app`
@@ -35,34 +47,13 @@ I'd expected to create a remote machine with `docker-machine` on DO or similar. 
 - get the IP address of the running instance `docker-machine ip test-app`
 - start container: `sudo docker-compose up web`
 
+The above didn't work, it just deployed locally and not to remote machine.
 
-sudo docker-compose up -d --force-recreate --build web
-
-
-docker run -d -p 80:80 --name web
-
-
-can deploy someone elses container, just not mine...
-
-
-sudo sh -c 'eval "$(docker-machine env test-app)"; docker-machine ls'
-
-
-docker-compose -p web up -d --build
-
-
-finally made some progress based on this article: https://medium.com/@manuel.pineault/deploying-reactjs-with-docker-ac16728c0896
+finally made some progress based via this article: https://medium.com/@manuel.pineault/deploying-reactjs-with-docker-ac16728c0896
 - creating and publishing image to dockerhub, then creating server from docker-machine, ssh'ng in, and pulling image from dockerhub
-
-it keeps getting deployed locally.. not to remote machine..
-
-
 
 for linux, extra scripts are needed to make entering the docker machine/container (remote) obvious from the shell/console. This article is useful: http://linuxbsdos.com/2016/12/14/how-to-install-docker-machine-on-linux-mint-18-and-18-1/
 
-as is this SO post: https://stackoverflow.com/questions/47273235/eval-docker-machine-env-myvm1-does-not-switch-to-shell-to-talk-to-myvm1
+also useful, SO post: https://stackoverflow.com/questions/47273235/eval-docker-machine-env-myvm1-does-not-switch-to-shell-to-talk-to-myvm1
 
 and this article: https://docs.docker.com/install/linux/linux-postinstall/
-
-still can't push directly to the remote instance, but what I can do is ssh in from docker-machine command `docker-machine ssh test-app` and then do a git pull, followed by `docker build` and `docker run` command.
-Could potentially automate this with a bash script?
