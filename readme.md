@@ -57,3 +57,6 @@ for linux, extra scripts are needed to make entering the docker machine/containe
 also useful, SO post: https://stackoverflow.com/questions/47273235/eval-docker-machine-env-myvm1-does-not-switch-to-shell-to-talk-to-myvm1
 
 and this article: https://docs.docker.com/install/linux/linux-postinstall/
+
+`docker build`: https://docs.docker.com/engine/reference/commandline/build/#options
+`docker run`: https://docs.docker.com/engine/reference/run/#container-identification
