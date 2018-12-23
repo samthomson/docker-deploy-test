@@ -8,5 +8,5 @@ const server = http.createServer((req, res) => {
 const PORT = 80
 
 server.listen(PORT, () => {
-    console.log('Listening on prot', PORT)
+    console.log('Listening on port', PORT)
 })
