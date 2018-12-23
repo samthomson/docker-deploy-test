@@ -1,5 +1,7 @@
 #!bin/bash
 
+# pull latest
+git pull
 # remove last instance
 docker rm $(docker stop $(sudo docker ps -aqf "name=test-name"))
 # build new instance
