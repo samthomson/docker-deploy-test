@@ -11,8 +11,9 @@ I'd expected to create a remote machine with `docker-machine` on DO or similar. 
 - create a remote machine with `docker-machine`
 - ssh into it with `docker-machine ssh [app]`
 - normal git workflow
-- ssh into remote machine, git pull, `docker run`
-
+- ssh into remote machine, git pull, `docker build` & `docker run`
+    - `docker build -t test-app .`
+    - `docker run -d -p 3004:80 test-app`
 
 ### to do
 
